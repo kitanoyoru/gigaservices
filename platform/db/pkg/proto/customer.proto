@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package kitanoyoru.gigaservices.db;
+
+option go_package = "github.com/kitanoyoru/gigaservices/apps/db/proto";
+
+message Customer {
+	string id = 1;
+	string name = 2;
+}
+
+// Create
+
+message CreateCustomerRequest {
+	string name = 1;
+	string email = 2;
+	string password = 3;
+}
+
+message CreateCustomerResponse {
+	Customer customer = 1;
+}
+
+// Get
+
+message GetCustomerByIdRequest {
+	string id = 1;
+}
+
+message GetCustomerByIdResponse {
+	Customer customer = 1;
+}
+
+message GetCustomerByEmailRequest {
+	string email = 1;
+}
+
+message GetCustomerByEmailResponse {
+	Customer customer = 1;
+}
+
+// List
+
+message ListCustomersRequest {}
+
+message ListCustomersResponse {
+	repeated Customer customers = 1;
+}
+
+
