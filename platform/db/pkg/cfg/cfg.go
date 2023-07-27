@@ -3,17 +3,18 @@ package cfg
 import (
 	"fmt"
 	"net/url"
+	"strconv"
 
 	"github.com/spf13/viper"
 )
 
 type ServerConfig struct {
-	Port string `mapstructure:"port"`
+	Port int `mapstructure:"port"`
 }
 
 type DatabaseConfig struct {
 	Host     string `mapstructure:"host"`
-	Port     string `mapstructure:"port"`
+	Port     int    `mapstructure:"port"`
 	Name     string `mapstructure:"name"`
 	User     string `mapstructure:"user"`
 	Password string `mapstructure:"password"`
@@ -22,7 +23,7 @@ type DatabaseConfig struct {
 func (dc *DatabaseConfig) ToUrl() string {
 	u := &url.URL{
 		Scheme: "http",
-		Host:   fmt.Sprintf("%s:%s", dc.Host, dc.Port),
+		Host:   fmt.Sprintf("%s:%s", dc.Host, strconv.Itoa(dc.Port)),
 	}
 
 	return u.String()
