@@ -136,7 +136,7 @@ pb:
 .PHONY: gen-proto
 gen-proto: $(BUF) $(PROTOC_GEN_GO) $(PROTOC_GEN_GO_GRPC) $(PROTOC_GEN_GRPC_GATEWAY)
 	$(BUF) generate \
-		--path ./apps/ \
+		#--path .// \
 		--path ./platform/db/
 
 .PHONY: ingress-nginx-manifest

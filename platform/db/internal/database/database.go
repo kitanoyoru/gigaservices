@@ -23,8 +23,13 @@ func NewDatabaseConnection() (*DatabaseConnection, error) {
 
 	do.ProvideValue[*kivik.Client](di.Provider, client)
 
-	return &DatabaseConnection{
-		customers: repositories.NewCustomerRepository(),
-		items:     repositories.NewItemRepository(),
-	}, nil
+	customerRepo := repositories.NewCustomerRepository()
+	itemRepo := repositories.NewItemRepository()
+
+	d := &DatabaseConnection{
+		customers: customerRepo,
+		items:     itemRepo,
+	}
+
+	return d, nil
 }

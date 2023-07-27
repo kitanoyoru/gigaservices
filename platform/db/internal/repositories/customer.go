@@ -77,10 +77,14 @@ func (r *CustomerRepository) GetAllCustomers(ctx context.Context) ([]*models.Cus
 	return customers, nil
 }
 
-func (r *CustomerRepository) AddCustomer(ctx context.Context, customer models.Customer) error {
-	if _, err := r.collection.Put(ctx, uuid.NewString(), customer); err != nil {
-		return err
+func (r *CustomerRepository) AddCustomer(ctx context.Context, customer *models.Customer) (*models.Customer, error) {
+	id := uuid.NewString()
+
+	if _, err := r.collection.Put(ctx, id, customer); err != nil {
+		return nil, err
 	}
 
-	return nil
+	customer.Id = id
+
+	return customer, nil
 }
