@@ -25,6 +25,6 @@ func NewDatabaseConnection() (*DatabaseConnection, error) {
 
 	return &DatabaseConnection{
 		customers: repositories.NewCustomerRepository(),
-		items:     repositories.NewItemsRepository(),
+		items:     repositories.NewItemRepository(),
 	}, nil
 }
