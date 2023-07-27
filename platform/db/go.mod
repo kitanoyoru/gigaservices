@@ -12,6 +12,7 @@ require (
 	github.com/go-kivik/couchdb/v4 v4.0.0-20230722194629-d2396f78b0a0 // indirect
 	github.com/go-kivik/kivik/v4 v4.0.0-20230529204752-3191d145b24a // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect

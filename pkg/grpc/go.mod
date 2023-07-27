@@ -1,4 +1,4 @@
-module github.com/kitanoyoru/gigaservices/libs/grpc
+module github.com/kitanoyoru/gigaservices/pkg/grpc
 
 go 1.20
 

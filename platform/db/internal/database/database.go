@@ -21,7 +21,7 @@ func NewDatabaseConnection() (*DatabaseConnection, error) {
 		return nil, err
 	}
 
-	do.ProvideValue[kivik.Client](di.Provider, client)
+	do.ProvideValue[*kivik.Client](di.Provider, client)
 
 	return &DatabaseConnection{
 		customers: repositories.NewCustomerRepository(),

@@ -4,7 +4,7 @@ import (
 	"context"
 	"os/signal"
 
-	"github.com/kitanoyoru/gigaservices/platform/db/internal/app"
+	app "github.com/kitanoyoru/gigaservices/platform/db/internal"
 	"github.com/kitanoyoru/gigaservices/platform/db/internal/di"
 	"github.com/kitanoyoru/gigaservices/platform/db/pkg/cfg"
 	"github.com/samber/do"

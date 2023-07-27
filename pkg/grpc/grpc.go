@@ -6,7 +6,7 @@ import (
 	"net"
 
 	middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	"github.com/kitanoyoru/gigaservices/libs/grpc/interceptor"
+	"github.com/kitanoyoru/gigaservices/pkg/grpc/interceptor"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	channelz "google.golang.org/grpc/channelz/service"

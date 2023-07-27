@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"
 
-	grpccontext "github.com/kitanoyoru/gigaservices/libs/grpc/context"
+	grpccontext "github.com/kitanoyoru/gigaservices/pkg/grpc/context"
 	"github.com/sirupsen/logrus"
 )
 
