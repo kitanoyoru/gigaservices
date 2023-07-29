@@ -1,0 +1,11 @@
+debug: false
+
+server:
+    port: 8080
+
+database:
+    host: "127.0.0.1"
+    port: 5984
+    user: "admin"
+    password: "admin"
+

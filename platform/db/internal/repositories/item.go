@@ -59,10 +59,14 @@ func (r *ItemRepository) GetAllItems(ctx context.Context) ([]*models.Item, error
 	return items, nil
 }
 
-func (r *ItemRepository) AddItem(ctx context.Context, item models.Item) error {
-	if _, err := r.collection.Put(ctx, uuid.NewString(), item); err != nil {
-		return err
+func (r *ItemRepository) AddItem(ctx context.Context, item *models.Item) (*models.Item, error) {
+	id := uuid.NewString()
+
+	if _, err := r.collection.Put(ctx, id, item); err != nil {
+		return nil, err
 	}
 
-	return nil
+	item.Id = id
+
+	return item, nil
 }

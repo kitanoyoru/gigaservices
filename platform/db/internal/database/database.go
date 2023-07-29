@@ -9,8 +9,8 @@ import (
 )
 
 type DatabaseConnection struct {
-	customers *repositories.CustomerRepository
-	items     *repositories.ItemRepository
+	Customers *repositories.CustomerRepository
+	Items     *repositories.ItemRepository
 }
 
 func NewDatabaseConnection() (*DatabaseConnection, error) {
@@ -27,8 +27,8 @@ func NewDatabaseConnection() (*DatabaseConnection, error) {
 	itemRepo := repositories.NewItemRepository()
 
 	d := &DatabaseConnection{
-		customers: customerRepo,
-		items:     itemRepo,
+		Customers: customerRepo,
+		Items:     itemRepo,
 	}
 
 	return d, nil

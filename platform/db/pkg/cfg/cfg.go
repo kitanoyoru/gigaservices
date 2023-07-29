@@ -30,7 +30,7 @@ func (dc *DatabaseConfig) ToUrl() string {
 }
 
 type Config struct {
-	Debug bool `mapstructure:"bool"`
+	Debug bool `mapstructure:"debug"`
 
 	Server   *ServerConfig   `mapstructure:"server"`
 	Database *DatabaseConfig `mapstructure:"database"`
