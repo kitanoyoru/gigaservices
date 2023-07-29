@@ -13,11 +13,8 @@ type ServerConfig struct {
 }
 
 type DatabaseConfig struct {
-	Host     string `mapstructure:"host"`
-	Port     int    `mapstructure:"port"`
-	Name     string `mapstructure:"name"`
-	User     string `mapstructure:"user"`
-	Password string `mapstructure:"password"`
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
 }
 
 func (dc *DatabaseConfig) ToUrl() string {
