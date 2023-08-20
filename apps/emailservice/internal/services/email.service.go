@@ -1,38 +1,88 @@
 package services
 
 import (
+	"context"
+	"encoding/json"
+
 	"github.com/go-gomail/gomail"
 	"github.com/kitanoyoru/kita/apps/emailservice/internal/config"
+	"github.com/kitanoyoru/kita/apps/emailservice/pkg/cache"
 	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
 	"github.com/kitanoyoru/kita/apps/emailservice/pkg/utils"
 )
 
-// REFACTOR: need to store subject and content of the letter in some hot memory in one structure
+// REFACTOR: move meta letter info from constants to some files
 
 const (
+	ConfirmationLetterKey     = "kita.emailservice.confirm"
 	ConfirmationLetterSubject = "Kita cluster hosting confirmation"
 )
 
-type Email struct {
-	creds *config.EmailConfig
+type CacheEmailLetter struct {
+	Subject string `json:"subject"`
+	Letter  string `json:"letter"`
 }
 
-func NewEmail() *Email {
-	creds := config.Email()
-	return &Email{
-		creds,
+func NewCacheEmailLetter(subject, letter string) *CacheEmailLetter {
+	return &CacheEmailLetter{
+		Subject: subject,
+		Letter:  letter,
 	}
 }
 
+type Email struct {
+	creds *config.EmailConfig
+
+	cache cache.Cache
+}
+
+func NewEmail() *Email {
+	emailCreds, cacheCreds := config.Email(), config.Cache()
+
+	cache := cache.NewRedis(cacheCreds.URL, cacheCreds.Password)
+
+	return &Email{
+		creds: emailCreds,
+		cache: cache,
+	}
+}
+
+func (e *Email) Init() error {
+	htmlContent := utils.ReadFile("./templates/letters/confirm.html")
+	cel := NewCacheEmailLetter(ConfirmationLetterSubject, htmlContent)
+
+	data, err := json.Marshal(cel)
+	if err != nil {
+		return err
+	}
+
+	err = e.cache.Put(context.Background(), ConfirmationLetterKey, data)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (e *Email) SendConfirmationMail(letterData *pb.SendOrderConfirmationRequest) error {
+	data, err := e.cache.Get(context.Background(), ConfirmationLetterKey)
+	if err != nil {
+		return err
+	}
+
+	var cel CacheEmailLetter
+	err = json.Unmarshal(data.([]byte), &cel)
+	if err != nil {
+		return err
+	}
+
 	m := gomail.NewMessage()
 
 	m.SetHeader("From", e.creds.SenderEmail)
 	m.SetHeader("To", letterData.Email)
-	m.SetHeader("Subject", ConfirmationLetterSubject)
+	m.SetHeader("Subject", cel.Subject)
 
-	htmlContent := utils.ReadFile("./templates/letters/confirm.html")
-	m.SetBody("text/html", htmlContent)
+	m.SetBody("text/html", cel.Letter)
 
 	return e.sendLetter(m)
 }
