@@ -12,6 +12,8 @@ require (
 	github.com/redis/go-redis/v9 v9.1.0
 	go-micro.dev/v4 v4.9.0
 	go.opentelemetry.io/otel v1.16.0
+	go.opentelemetry.io/otel/exporters/jaeger v1.16.0
+	go.opentelemetry.io/otel/sdk v1.16.0
 	google.golang.org/grpc v1.42.0
 	google.golang.org/protobuf v1.31.0
 )
@@ -61,7 +63,7 @@ require (
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/net v0.0.0-20221004154528-8021a29435af // indirect
 	golang.org/x/sync v0.0.0-20220929204114-8fcdb60fdcc0 // indirect
-	golang.org/x/sys v0.0.0-20221006211917-84dc82d7e875 // indirect
+	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/genproto v0.0.0-20211020151524-b7c3a969101a // indirect

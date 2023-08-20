@@ -15,6 +15,6 @@ func (h *Health) Check(ctx context.Context, req *pb.HealthCheckRequest, rsp *pb.
 	return nil
 }
 
-func (h *Health) Watch(ctx context.Context, req *pb.HealthCheckRequest, rsp *pb.HealthCheckResponse) error {
+func (h *Health) Watch(ctx context.Context, req *pb.HealthCheckRequest, stream pb.Health_WatchStream) error {
 	return status.Errorf(codes.Unimplemented, "health check via Watch not implemented")
 }

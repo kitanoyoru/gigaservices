@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"log"
 	"strings"
 	"time"
 
@@ -54,7 +55,7 @@ func (app *App) Init() error {
 	}
 
 	if cfg := config.Tracing(); cfg.Enable {
-		tp, err := providers.NewTracerProvider(app.name, app.srv.Server().Options().Id, cfg.Jaeger.URL)
+		tp, err := providers.NewTracerProvider(app.srv.Server().Options().Id, app.name, app.version, cfg.Jaeger.URL)
 		if err != nil {
 			return err
 		}
@@ -64,7 +65,7 @@ func (app *App) Init() error {
 			defer cancel()
 
 			if err := tp.Shutdown(ctx); err != nil {
-				return err
+				log.Fatal(err)
 			}
 		}()
 

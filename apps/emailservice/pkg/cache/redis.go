@@ -7,8 +7,6 @@ import (
 )
 
 type Redis struct {
-	Cache
-
 	client *redis.Client
 }
 
