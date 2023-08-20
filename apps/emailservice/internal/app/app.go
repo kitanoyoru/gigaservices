@@ -23,7 +23,7 @@ import (
 	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
 )
 
-// TODO: implement journal db
+// TODO: implement journal db (in email handler)
 // TODO: helath checker
 // TODO: service status (ram, cpu, hdd etc)
 
