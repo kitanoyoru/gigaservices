@@ -22,4 +22,4 @@ jobs:
         go-version: '1.20'
 
     - name: Build emailservice
-      run: go build -v ./apps/emailservice/cmd/main.go
+      run: cd ./apps/emailservice && go build -v ./cmd/main.go
