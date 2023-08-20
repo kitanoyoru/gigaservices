@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package emailservice;
+
+option go_package = "./pkg/proto;emailservice";
+
+message Empty {}
+
+service EmailService {
+	rpc SendOrderConfirmation(SendOrderConfirmationRequest) returns (Empty) {}
+}
+
+message SendOrderConfirmationRequest {
+	string email = 1;
+	OrderResult order = 2;
+}
+
+message OrderResult {
+	string order_id = 1;
+
+	Money order_cost = 2;
+	OrderItem item = 3;
+}
+
+message Money {
+	string currency_code = 1;
+	int64 units = 2;
+	int32 nanos = 3;
+}
+
+message OrderItem {
+	bool physical = 2;
+	int64 nodes = 3;
+}
+
