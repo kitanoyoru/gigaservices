@@ -23,7 +23,6 @@ import (
 	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
 )
 
-// TODO: implement journal db (in email handler)
 // TODO: helath checker
 // TODO: service status (ram, cpu, hdd etc)
 
@@ -98,7 +97,7 @@ func (app *App) Run() error {
 }
 
 func (app *App) registerHandlers() error {
-	if err := pb.RegisterEmailServiceHandler(app.srv.Server(), new(handlers.Email)); err != nil {
+	if err := pb.RegisterEmailServiceHandler(app.srv.Server(), handlers.NewEmail()); err != nil {
 		return err
 	}
 

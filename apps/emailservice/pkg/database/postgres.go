@@ -22,15 +22,23 @@ func NewPostgres(databaseUrl string) (*Postgres, error) {
 		return nil, err
 	}
 
-	d, err := db.DB()
+	return &Postgres{
+		db,
+	}, nil
+}
+
+func (e *Postgres) Init() error {
+	d, err := e.db.DB()
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	d.SetMaxOpenConns(MaxOpenConns)
 	d.SetConnMaxIdleTime(MaxIdleTime)
 
-	return &Postgres{
-		db,
-	}, nil
+	return nil
+}
+
+func (e *Postgres) Save(model interface{}) error {
+	return e.db.Create(model).Error
 }

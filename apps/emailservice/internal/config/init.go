@@ -18,6 +18,10 @@ func Email() *EmailConfig {
 	return &cfg.Email
 }
 
+func Database() *DatabaseConfig {
+	return &cfg.Database
+}
+
 func Cache() *CacheConfig {
 	return &cfg.Cache
 }

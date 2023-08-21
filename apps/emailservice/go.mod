@@ -10,6 +10,7 @@ require (
 	github.com/go-micro/plugins/v4/wrapper/trace/opentelemetry v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/redis/go-redis/v9 v9.1.0
+	github.com/satori/go.uuid v1.2.0
 	go-micro.dev/v4 v4.9.0
 	go.opentelemetry.io/otel v1.16.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.16.0
@@ -45,6 +46,7 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/handlers v1.5.1 // indirect
+	github.com/guregu/null v4.0.0+incompatible // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
