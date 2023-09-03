@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package authservice;
+
+message Empty {}
+
+service AuthService {
+	rpc SendLoginUser(LoginUserRequest) returns (LoginUserResponse) {}
+	rpc SendRegisterUser(RegisterUserRequest) returns (RegisterUserResponse)
+	rpc SendAuthorizeAction(AuthorizeActionRequest) returns (AuthorizeActionResponse)
+}
+
