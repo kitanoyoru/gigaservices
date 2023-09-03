@@ -19,6 +19,8 @@ var (
 	_ = uuid.UUID{}
 )
 
+// FIX: primary key should be int
+
 type LogModel struct {
 	ID    string `gorm:"primary_key;column:id;type:TEXT" json:"id"`
 	Email string `gorm:"column:email;type:TEXT" json:"email"`

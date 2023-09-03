@@ -1,0 +1,29 @@
+port: 16001
+
+email:
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  senderEmail: kita@gmail.com
+  appPassword: "12345678"
+
+database:
+  url: postgres.com
+  password: "12345678"
+
+cache:
+  url: redis.com
+  password: "12345678"
+
+messageBroker:
+    brokersUrl:
+        - "broker1"
+        - "broker2"
+        - "broker3"
+
+tracing:
+  enable: false
+  jaeger:
+    url: jaeger.com
+
+
+

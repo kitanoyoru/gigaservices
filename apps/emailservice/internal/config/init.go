@@ -26,6 +26,10 @@ func Cache() *CacheConfig {
 	return &cfg.Cache
 }
 
+func MessageBroker() *MessageBrokerConfig {
+	return &cfg.MessageBroker
+}
+
 func Tracing() *TracingConfig {
 	return &cfg.Tracing
 }

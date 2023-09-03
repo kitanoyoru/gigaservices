@@ -10,6 +10,7 @@ import (
 	"github.com/kitanoyoru/kita/apps/emailservice/internal/models"
 	"github.com/kitanoyoru/kita/apps/emailservice/internal/services"
 	"github.com/kitanoyoru/kita/apps/emailservice/pkg/database"
+	"github.com/kitanoyoru/kita/apps/emailservice/pkg/events"
 	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
 	uuid "github.com/satori/go.uuid"
 	"go-micro.dev/v4/util/log"
@@ -20,6 +21,7 @@ import (
 type Email struct {
 	emailService *services.Email
 	db           *database.Postgres
+	p            *events.KafkaProducer
 }
 
 func NewEmail() *Email {
@@ -33,9 +35,15 @@ func NewEmail() *Email {
 		log.Error(err)
 	}
 
+	p, err := initEventProducer()
+	if err != nil {
+		log.Error(err)
+	}
+
 	return &Email{
 		emailService,
 		db,
+		p,
 	}
 }
 
@@ -73,7 +81,17 @@ func initDb() (*database.Postgres, error) {
 	}
 
 	return dbConn, err
+}
 
+func initEventProducer() (*events.KafkaProducer, error) {
+	cfg := config.MessageBroker()
+
+	p, err := events.NewKafkaProducer(cfg.BrokersUrl)
+	if err != nil {
+		return nil, err
+	}
+
+	return p, nil
 }
 
 func (e *Email) log(email string, err error) {

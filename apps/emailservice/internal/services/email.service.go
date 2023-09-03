@@ -11,13 +11,6 @@ import (
 	"github.com/kitanoyoru/kita/apps/emailservice/pkg/utils"
 )
 
-// REFACTOR: move meta letter info from constants to some files
-
-const (
-	ConfirmationLetterKey     = "kita.emailservice.confirm"
-	ConfirmationLetterSubject = "Kita cluster hosting confirmation"
-)
-
 type CacheEmailLetter struct {
 	Subject string `json:"subject"`
 	Letter  string `json:"letter"`
@@ -48,7 +41,7 @@ func NewEmail() *Email {
 }
 
 func (e *Email) Init() error {
-	htmlContent := utils.ReadFile("./templates/letters/confirm.html")
+	htmlContent := utils.ReadFile(EmailLetterTemplatesPath + "confirmation-letter.html")
 	cel := NewCacheEmailLetter(ConfirmationLetterSubject, htmlContent)
 
 	data, err := json.Marshal(cel)

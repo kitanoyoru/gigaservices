@@ -12,6 +12,8 @@ const (
 	MaxIdleTime  = 1 * time.Minute
 )
 
+// REFACTOR: interface
+
 type Postgres struct {
 	db *gorm.DB
 }
