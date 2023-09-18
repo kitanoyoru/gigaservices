@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "auth"
+version = "0.1.0"
+description = "Auth microservice of the Kita project"
+authors = ["Alexandr Rutkowski <kitanoyoru@protonmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+grpcio = "^1.58.0"
+hydra-core = "^1.3.2"
+dependency-injector = "^4.41.0"
+kafka-python = "^2.0.2"
+redis = "^5.0.0"
+sqlalchemy = "^2.0.20"
+alembic = "^1.12.0"
+pyjwt = "^2.8.0"
+orjson = "^3.9.7"
+cryptography = "^41.0.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+ruff = "^0.0.290"
+pytest = "^7.4.2"
+pyright = "^1.1.327"
+sphinx = "^7.2.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py310"
+select = ["F"]
+ignore = ["F403"]
+
+[tool.pyright]
+typeCheckingMode = "strict"
+# reportMissingTypeArgument = "none"
+reportUnknownVariableType = "none"
+reportUnknownArgumentType = "none"
+reportUnusedFunction = "none"
+# reportPrivateUsage = "none"
+reportUnknownMemberType = "none"
+reportMissingTypeStubs = false
+useLibraryCodeForTypes = true

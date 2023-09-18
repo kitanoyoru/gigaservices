@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package authservice;
+
+message Empty {}
+
+service AuthService {
+  rpc SendLoginUser(LoginUserRequest) returns (LoginUserResponse) {}
+  rpc SendRegisterUser(RegisterUserRequest) returns (Empty) {}
+
+  rpc GetNewTokenByRefresh(GetNewTokenRequest) returns (GetNewTokenRequest) {}
+
+  rpc SendAuthorizeAction(AuthorizeActionRequest) returns (AuthorizeActionResponse) {}
+}
+
+message LoginUserRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginUserResponse {
+  string auth_token = 2;
+  string refresh_token = 3;
+}
+
+message RegisterUserRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message GetNewTokenRequest {
+  string refresh_token = 1;
+}
+
+message GetNewTokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message AuthorizeActionRequest {
+  string access_token = 1;
+}
+
+message AuthorizeActionResponse {
+  enum AuthorizeActionnState {
+    AUTHORIZED = 0;
+    NOT_AUTHORIZED = 1;
+  }
+}

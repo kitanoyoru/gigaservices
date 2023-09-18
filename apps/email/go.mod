@@ -1,4 +1,4 @@
-module github.com/kitanoyoru/kita/apps/emailservice
+module github.com/kitanoyoru/kita/apps/email
 
 go 1.20
 
