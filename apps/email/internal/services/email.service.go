@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 
 	"github.com/go-gomail/gomail"
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/config"
-	"github.com/kitanoyoru/kita/apps/emailservice/pkg/cache"
-	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
-	"github.com/kitanoyoru/kita/apps/emailservice/pkg/utils"
+	"github.com/kitanoyoru/kita/apps/email/internal/config"
+	"github.com/kitanoyoru/kita/apps/email/pkg/cache"
+	pb "github.com/kitanoyoru/kita/apps/email/pkg/proto"
+	"github.com/kitanoyoru/kita/apps/email/pkg/utils"
 )
 
 type CacheEmailLetter struct {

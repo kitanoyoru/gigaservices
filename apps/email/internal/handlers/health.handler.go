@@ -3,7 +3,7 @@ package handlers
 import (
 	"context"
 
-	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
+	pb "github.com/kitanoyoru/kita/apps/email/pkg/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

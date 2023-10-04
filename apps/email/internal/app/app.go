@@ -16,11 +16,11 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 
 	_ "github.com/go-micro/plugins/v4/registry/kubernetes"
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/config"
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/handlers"
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/providers"
+	"github.com/kitanoyoru/kita/apps/email/internal/config"
+	"github.com/kitanoyoru/kita/apps/email/internal/handlers"
+	"github.com/kitanoyoru/kita/apps/email/internal/providers"
 
-	pb "github.com/kitanoyoru/kita/apps/emailservice/pkg/proto"
+	pb "github.com/kitanoyoru/kita/apps/email/pkg/proto"
 )
 
 // TODO: helath checker

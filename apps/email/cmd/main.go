@@ -3,8 +3,8 @@ package main
 import (
 	"go-micro.dev/v4/logger"
 
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/app"
-	"github.com/kitanoyoru/kita/apps/emailservice/internal/config"
+	"github.com/kitanoyoru/kita/apps/email/internal/app"
+	"github.com/kitanoyoru/kita/apps/email/internal/config"
 )
 
 const (
