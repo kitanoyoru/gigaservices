@@ -15,36 +15,34 @@ from src.proto import auth_service_pb2_grpc, health_pb2_grpc
 
 
 class IServer(ABC):
-	@abstractmethod
-	def serve(self):
-		pass
+    @abstractmethod
+    def serve(self):
+        pass
 
-	@abstractmethod
-	def _register_custom_signal_handlers(self):
-		pass
+    @abstractmethod
+    def _register_custom_signal_handlers(self):
+        pass
 
 
 class Server(IServer):
-	def __init__(self, config: AppConfig):
-		self._config = config
+    def __init__(self, config: AppConfig):
+        self._config = config
 
-	def serve(self):
-		server = grpc.server(ThreadPoolExecutor(max_workers=self._config.max_grpc_workers))
+    def serve(self):
+        server = grpc.server(
+            ThreadPoolExecutor(max_workers=self._config.max_grpc_workers)
+        )
 
-		auth_service_pb2_grpc.add_AuthServiceServicer_to_server(AuthService(), server)
-		health_pb2_grpc.add_HealthServicer_to_server(HealthService(), server)
+        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(AuthService(), server)
+        health_pb2_grpc.add_HealthServicer_to_server(HealthService(), server)
 
-		server.add_insecure_port("[::]:" + str(self._config.port))
-		server.wait_for_termination()
+        server.add_insecure_port("[::]:" + str(self._config.port))
+        server.wait_for_termination()
 
-		self._register_custom_signal_handlers()
+        self._register_custom_signal_handlers()
 
-	def _register_custom_signal_handlers(self):
-		def sighup_handler():
-			OmegaConf.save(self._config, Constants.CONFIG_FULL_PATH)
+    def _register_custom_signal_handlers(self):
+        def sighup_handler():
+            OmegaConf.save(self._config, Constants.CONFIG_FULL_PATH)
 
-
-		signal.signal(signal.SIGHUP, sighup_handler) # type: ignore
-
-
-
+        signal.signal(signal.SIGHUP, sighup_handler)  # type: ignore

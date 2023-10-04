@@ -5,33 +5,32 @@ from dataclasses import dataclass
 
 @dataclass(slots=True)
 class DatabaseConfig:
-	url: str
-	username: str
-	password: str
+    url: str
+    username: str
+    password: str
 
 
 @dataclass(slots=True)
 class CacheConfig:
-	url: str
-	username: str
-	password: str
-
+    url: str
+    username: str
+    password: str
 
 
 @dataclass(slots=True)
 class MessageBrokerConfig:
-	brokers_url: list[str]
+    brokers_url: list[str]
 
 
 @dataclass(slots=True)
 class AppConfig:
-	port: int
+    port: int
 
-	max_grpc_workers: int
+    max_grpc_workers: int
 
-	db: DatabaseConfig
-	cache: CacheConfig
-	broker: MessageBrokerConfig
+    db: DatabaseConfig
+    cache: CacheConfig
+    broker: MessageBrokerConfig
 
 
 cs = ConfigStore.instance()

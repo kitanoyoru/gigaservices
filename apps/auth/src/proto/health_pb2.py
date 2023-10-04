@@ -6,27 +6,28 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12proto/health.proto\x12\x0b\x61uthservice\".\n\x12HealthCheckRequest\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service\"\xeb\x01\n\x13HealthCheckResponse\x12\x46\n\x06status\x18\x01 \x01(\x0e\x32..authservice.HealthCheckResponse.ServingStatusR\x06status\"\x8b\x01\n\rServingStatus\x12\x1a\n\x16SERVING_STATUS_UNKNOWN\x10\x00\x12\x1a\n\x16SERVING_STATUS_SERVING\x10\x01\x12\x1e\n\x1aSERVING_STATUS_NOT_SERVING\x10\x02\x12\"\n\x1eSERVING_STATUS_SERVICE_UNKNOWN\x10\x03\x32\xa6\x01\n\x06Health\x12L\n\x05\x43heck\x12\x1f.authservice.HealthCheckRequest\x1a .authservice.HealthCheckResponse\"\x00\x12N\n\x05Watch\x12\x1f.authservice.HealthCheckRequest\x1a .authservice.HealthCheckResponse\"\x00\x30\x01\x42j\n\x0f\x63om.authserviceB\x0bHealthProtoP\x01\xa2\x02\x03\x41XX\xaa\x02\x0b\x41uthservice\xca\x02\x0b\x41uthservice\xe2\x02\x17\x41uthservice\\GPBMetadata\xea\x02\x0b\x41uthserviceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x12proto/health.proto\x12\x0b\x61uthservice".\n\x12HealthCheckRequest\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service"\xeb\x01\n\x13HealthCheckResponse\x12\x46\n\x06status\x18\x01 \x01(\x0e\x32..authservice.HealthCheckResponse.ServingStatusR\x06status"\x8b\x01\n\rServingStatus\x12\x1a\n\x16SERVING_STATUS_UNKNOWN\x10\x00\x12\x1a\n\x16SERVING_STATUS_SERVING\x10\x01\x12\x1e\n\x1aSERVING_STATUS_NOT_SERVING\x10\x02\x12"\n\x1eSERVING_STATUS_SERVICE_UNKNOWN\x10\x03\x32\xa6\x01\n\x06Health\x12L\n\x05\x43heck\x12\x1f.authservice.HealthCheckRequest\x1a .authservice.HealthCheckResponse"\x00\x12N\n\x05Watch\x12\x1f.authservice.HealthCheckRequest\x1a .authservice.HealthCheckResponse"\x00\x30\x01\x42j\n\x0f\x63om.authserviceB\x0bHealthProtoP\x01\xa2\x02\x03\x41XX\xaa\x02\x0b\x41uthservice\xca\x02\x0b\x41uthservice\xe2\x02\x17\x41uthservice\\GPBMetadata\xea\x02\x0b\x41uthserviceb\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.health_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "proto.health_pb2", _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-  DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\017com.authserviceB\013HealthProtoP\001\242\002\003AXX\252\002\013Authservice\312\002\013Authservice\342\002\027Authservice\\GPBMetadata\352\002\013Authservice'
-  _globals['_HEALTHCHECKREQUEST']._serialized_start=35
-  _globals['_HEALTHCHECKREQUEST']._serialized_end=81
-  _globals['_HEALTHCHECKRESPONSE']._serialized_start=84
-  _globals['_HEALTHCHECKRESPONSE']._serialized_end=319
-  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_start=180
-  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_end=319
-  _globals['_HEALTH']._serialized_start=322
-  _globals['_HEALTH']._serialized_end=488
+    DESCRIPTOR._options = None
+    DESCRIPTOR._serialized_options = b"\n\017com.authserviceB\013HealthProtoP\001\242\002\003AXX\252\002\013Authservice\312\002\013Authservice\342\002\027Authservice\\GPBMetadata\352\002\013Authservice"
+    _globals["_HEALTHCHECKREQUEST"]._serialized_start = 35
+    _globals["_HEALTHCHECKREQUEST"]._serialized_end = 81
+    _globals["_HEALTHCHECKRESPONSE"]._serialized_start = 84
+    _globals["_HEALTHCHECKRESPONSE"]._serialized_end = 319
+    _globals["_HEALTHCHECKRESPONSE_SERVINGSTATUS"]._serialized_start = 180
+    _globals["_HEALTHCHECKRESPONSE_SERVINGSTATUS"]._serialized_end = 319
+    _globals["_HEALTH"]._serialized_start = 322
+    _globals["_HEALTH"]._serialized_end = 488
 # @@protoc_insertion_point(module_scope)

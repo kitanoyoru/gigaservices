@@ -15,25 +15,25 @@ class AuthServiceStub(object):
             channel: A grpc.Channel.
         """
         self.SendLoginUser = channel.unary_unary(
-                '/authservice.AuthService/SendLoginUser',
-                request_serializer=proto_dot_auth__service__pb2.LoginUserRequest.SerializeToString,
-                response_deserializer=proto_dot_auth__service__pb2.LoginUserResponse.FromString,
-                )
+            "/authservice.AuthService/SendLoginUser",
+            request_serializer=proto_dot_auth__service__pb2.LoginUserRequest.SerializeToString,
+            response_deserializer=proto_dot_auth__service__pb2.LoginUserResponse.FromString,
+        )
         self.SendRegisterUser = channel.unary_unary(
-                '/authservice.AuthService/SendRegisterUser',
-                request_serializer=proto_dot_auth__service__pb2.RegisterUserRequest.SerializeToString,
-                response_deserializer=proto_dot_auth__service__pb2.Empty.FromString,
-                )
+            "/authservice.AuthService/SendRegisterUser",
+            request_serializer=proto_dot_auth__service__pb2.RegisterUserRequest.SerializeToString,
+            response_deserializer=proto_dot_auth__service__pb2.Empty.FromString,
+        )
         self.GetNewTokenByRefresh = channel.unary_unary(
-                '/authservice.AuthService/GetNewTokenByRefresh',
-                request_serializer=proto_dot_auth__service__pb2.GetNewTokenRequest.SerializeToString,
-                response_deserializer=proto_dot_auth__service__pb2.GetNewTokenRequest.FromString,
-                )
+            "/authservice.AuthService/GetNewTokenByRefresh",
+            request_serializer=proto_dot_auth__service__pb2.GetNewTokenRequest.SerializeToString,
+            response_deserializer=proto_dot_auth__service__pb2.GetNewTokenRequest.FromString,
+        )
         self.SendAuthorizeAction = channel.unary_unary(
-                '/authservice.AuthService/SendAuthorizeAction',
-                request_serializer=proto_dot_auth__service__pb2.AuthorizeActionRequest.SerializeToString,
-                response_deserializer=proto_dot_auth__service__pb2.AuthorizeActionResponse.FromString,
-                )
+            "/authservice.AuthService/SendAuthorizeAction",
+            request_serializer=proto_dot_auth__service__pb2.AuthorizeActionRequest.SerializeToString,
+            response_deserializer=proto_dot_auth__service__pb2.AuthorizeActionResponse.FromString,
+        )
 
 
 class AuthServiceServicer(object):
@@ -42,124 +42,173 @@ class AuthServiceServicer(object):
     def SendLoginUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def SendRegisterUser(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def GetNewTokenByRefresh(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
     def SendAuthorizeAction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
+        context.set_details("Method not implemented!")
+        raise NotImplementedError("Method not implemented!")
 
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'SendLoginUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.SendLoginUser,
-                    request_deserializer=proto_dot_auth__service__pb2.LoginUserRequest.FromString,
-                    response_serializer=proto_dot_auth__service__pb2.LoginUserResponse.SerializeToString,
-            ),
-            'SendRegisterUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.SendRegisterUser,
-                    request_deserializer=proto_dot_auth__service__pb2.RegisterUserRequest.FromString,
-                    response_serializer=proto_dot_auth__service__pb2.Empty.SerializeToString,
-            ),
-            'GetNewTokenByRefresh': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetNewTokenByRefresh,
-                    request_deserializer=proto_dot_auth__service__pb2.GetNewTokenRequest.FromString,
-                    response_serializer=proto_dot_auth__service__pb2.GetNewTokenRequest.SerializeToString,
-            ),
-            'SendAuthorizeAction': grpc.unary_unary_rpc_method_handler(
-                    servicer.SendAuthorizeAction,
-                    request_deserializer=proto_dot_auth__service__pb2.AuthorizeActionRequest.FromString,
-                    response_serializer=proto_dot_auth__service__pb2.AuthorizeActionResponse.SerializeToString,
-            ),
+        "SendLoginUser": grpc.unary_unary_rpc_method_handler(
+            servicer.SendLoginUser,
+            request_deserializer=proto_dot_auth__service__pb2.LoginUserRequest.FromString,
+            response_serializer=proto_dot_auth__service__pb2.LoginUserResponse.SerializeToString,
+        ),
+        "SendRegisterUser": grpc.unary_unary_rpc_method_handler(
+            servicer.SendRegisterUser,
+            request_deserializer=proto_dot_auth__service__pb2.RegisterUserRequest.FromString,
+            response_serializer=proto_dot_auth__service__pb2.Empty.SerializeToString,
+        ),
+        "GetNewTokenByRefresh": grpc.unary_unary_rpc_method_handler(
+            servicer.GetNewTokenByRefresh,
+            request_deserializer=proto_dot_auth__service__pb2.GetNewTokenRequest.FromString,
+            response_serializer=proto_dot_auth__service__pb2.GetNewTokenRequest.SerializeToString,
+        ),
+        "SendAuthorizeAction": grpc.unary_unary_rpc_method_handler(
+            servicer.SendAuthorizeAction,
+            request_deserializer=proto_dot_auth__service__pb2.AuthorizeActionRequest.FromString,
+            response_serializer=proto_dot_auth__service__pb2.AuthorizeActionResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'authservice.AuthService', rpc_method_handlers)
+        "authservice.AuthService", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class AuthService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def SendLoginUser(request,
+    def SendLoginUser(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/authservice.AuthService/SendLoginUser',
+            "/authservice.AuthService/SendLoginUser",
             proto_dot_auth__service__pb2.LoginUserRequest.SerializeToString,
             proto_dot_auth__service__pb2.LoginUserResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def SendRegisterUser(request,
+    def SendRegisterUser(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/authservice.AuthService/SendRegisterUser',
+            "/authservice.AuthService/SendRegisterUser",
             proto_dot_auth__service__pb2.RegisterUserRequest.SerializeToString,
             proto_dot_auth__service__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def GetNewTokenByRefresh(request,
+    def GetNewTokenByRefresh(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/authservice.AuthService/GetNewTokenByRefresh',
+            "/authservice.AuthService/GetNewTokenByRefresh",
             proto_dot_auth__service__pb2.GetNewTokenRequest.SerializeToString,
             proto_dot_auth__service__pb2.GetNewTokenRequest.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )
 
     @staticmethod
-    def SendAuthorizeAction(request,
+    def SendAuthorizeAction(
+        request,
+        target,
+        options=(),
+        channel_credentials=None,
+        call_credentials=None,
+        insecure=False,
+        compression=None,
+        wait_for_ready=None,
+        timeout=None,
+        metadata=None,
+    ):
+        return grpc.experimental.unary_unary(
+            request,
             target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/authservice.AuthService/SendAuthorizeAction',
+            "/authservice.AuthService/SendAuthorizeAction",
             proto_dot_auth__service__pb2.AuthorizeActionRequest.SerializeToString,
             proto_dot_auth__service__pb2.AuthorizeActionResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+        )

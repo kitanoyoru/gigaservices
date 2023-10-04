@@ -11,4 +11,3 @@ def cli():
 
 cli.add_command(start_server_command)
 cli.add_command(get_config_command)
-
