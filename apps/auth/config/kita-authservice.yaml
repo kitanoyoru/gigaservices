@@ -1,0 +1,18 @@
+port: 16002
+
+database:
+  url: postgres.com
+  username: "kita"
+  password: "12345678"
+
+cache:
+  url: redis.com
+  username: "kita"
+  password: "12345678"
+
+messageBroker:
+    brokersUrl:
+        - "broker1"
+        - "broker2"
+        - "broker3"
+
