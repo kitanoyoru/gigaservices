@@ -18,6 +18,7 @@ pyjwt = "^2.8.0"
 orjson = "^3.9.7"
 cryptography = "^41.0.3"
 celery = "^5.3.4"
+grpclib = {extras = ["protobuf"], version = "^0.4.6"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"
