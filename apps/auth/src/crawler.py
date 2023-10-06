@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass(slots=True)
 class LogModelImport:
-    id: str
+    id: int
     is_error: bool
     message: str
     created_at: date
@@ -33,7 +33,7 @@ async def load_logs(
 
     for fields in data.values():
         try:
-            model_id = _get_model_required_field(fields, "id")
+            model_id = int(_get_model_required_field(fields, "id"))
 
             is_error = bool(_get_model_required_field(fields, "is_error"))
             message = _get_model_required_field(fields, "message")

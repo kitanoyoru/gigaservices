@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator
 
 import alembic.command
 import click
@@ -14,6 +15,7 @@ from src.config import AppConfig, DatabaseConfig
 from src.constants import Constants
 from src.crawler import load_logs, load_repository_urls
 from src.models import ModelType
+from src.services import Service
 
 logger = logging.getLogger(__name__)
 
@@ -78,8 +80,8 @@ async def _import_repository(
 
 
 @asynccontextmanager
-async def _create_service(engine: AsyncEngine):
-    async with service.from_engine(engine) as service:
+async def _create_service(engine: AsyncEngine) -> AsyncGenerator[Service, Any]:
+    async with Service.from_engine(engine) as service:
         yield service
 
 
