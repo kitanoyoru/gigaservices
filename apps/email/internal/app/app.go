@@ -7,7 +7,7 @@ import (
 	"time"
 
 	grpcc "github.com/go-micro/plugins/v4/client/grpc"
-	_ "github.com/go-micro/plugins/v4/registry/kubernetes"
+	"github.com/go-micro/plugins/v4/registry/kubernetes"
 	grpcs "github.com/go-micro/plugins/v4/server/grpc"
 	"github.com/go-micro/plugins/v4/wrapper/trace/opentelemetry"
 	"go-micro.dev/v4"
@@ -18,6 +18,7 @@ import (
 	_ "github.com/go-micro/plugins/v4/registry/kubernetes"
 	"github.com/kitanoyoru/kita/apps/email/internal/config"
 	"github.com/kitanoyoru/kita/apps/email/internal/handlers"
+	"github.com/kitanoyoru/kita/apps/email/internal/middlewares"
 	"github.com/kitanoyoru/kita/apps/email/internal/providers"
 
 	pb "github.com/kitanoyoru/kita/apps/email/pkg/proto"
@@ -47,10 +48,14 @@ func NewApp(name, version string) *App {
 }
 
 func (app *App) Init() error {
+	registry := kubernetes.NewRegistry()
+
 	opts := []micro.Option{
 		micro.Name(app.name),
 		micro.Version(app.version),
 		micro.Address(config.Address()),
+		micro.Registry(registry),
+		micro.WrapHandler(middlewares.LogMiddleware),
 	}
 
 	if cfg := config.Tracing(); cfg.Enable {

@@ -1,9 +1,9 @@
 package utils
 
-import "io/ioutil"
+import "os"
 
 func ReadFile(filePath string) string {
-	content, err := ioutil.ReadFile(filePath)
+	content, err := os.ReadFile(filePath)
 	if err != nil {
 		panic(err)
 	}

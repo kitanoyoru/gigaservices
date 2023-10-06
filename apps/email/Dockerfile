@@ -43,9 +43,3 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 16001
 
 CMD ["emailservice"]
-
-
-
-
-
-
