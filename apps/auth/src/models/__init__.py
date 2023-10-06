@@ -1,9 +1,5 @@
-from enum import IntEnum, auto 
-
-from .log import Base
+from enum import Enum
 
 
-class ModelType(IntEnum):
-    LOG = auto() 
-
-
+class ModelType(Enum):
+    LOG = "log"

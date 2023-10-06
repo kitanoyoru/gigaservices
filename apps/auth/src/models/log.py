@@ -15,7 +15,7 @@ class LogModel(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
-    is_error: Mapped[bool] = mapped_column(Boolean)
+    is_error: Mapped[bool] = mapped_column(Boolean, default=False)
     message: Mapped[str] = mapped_column(String, nullable=False)
 
     created_at: Mapped[date] = mapped_column(

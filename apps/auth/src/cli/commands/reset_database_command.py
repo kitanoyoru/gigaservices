@@ -1,23 +1,22 @@
 import asyncio
-import click
 import logging
-import alembic.command
-
 from contextlib import asynccontextmanager
 
+import alembic.command
+import click
 import httpx
-
 import hydra
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncEngine
-from src import database
 
+from src import database
 from src.config import AppConfig, DatabaseConfig
 from src.constants import Constants
-from src.crawler import load_repository_urls
+from src.crawler import load_logs, load_repository_urls
 from src.models import ModelType
 
 logger = logging.getLogger(__name__)
+
 
 async def _reset_db(db_config: DatabaseConfig):
     engine = database.create_engine_from_conf(db_config)
@@ -48,18 +47,34 @@ async def _reset_db(db_config: DatabaseConfig):
         timeout=Constants.HTTPX_TIMEOUT,
         transport=httpx.AsyncHTTPTransport(
             retries=Constants.HTTPX_RETRIES,
-        )
+        ),
     ) as client:
-        tasks = [_import_repository(engine, client, model, url) for model, url in urls.items()]
+        tasks = [
+            _import_repository(engine, client, model, url)
+            for model, url in urls.items()
+        ]
         await asyncio.gather(*tasks)
 
 
-async def _import_repository(engine: AsyncEngine, client: https.AsyncClient, model: str, url: str):
+"""
+sources json will be smth like that
+
+{
+        "log": "https://url.com"
+}
+"""
+
+
+async def _import_repository(
+    engine: AsyncEngine, client: httpx.AsyncClient, model: str, url: str
+):
     match model:
         case ModelType.LOG.value:
-            async for log in load_logs(client, url):
+            async for log_import in load_logs(client, url):
                 async with _create_service(engine) as service:
-                    service.save_log(log)
+                    service.save_log(log_import)
+        case _:
+            pass
 
 
 @asynccontextmanager
@@ -67,8 +82,8 @@ async def _create_service(engine: AsyncEngine):
     async with service.from_engine(engine) as service:
         yield service
 
+
 @click.command()
-@click.option("--sources-file", help="Sources file to populate database after migration")
 @hydra.main(
     version_base=None,
     config_path=Constants.CONFIG_PATH,

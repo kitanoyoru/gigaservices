@@ -7,6 +7,8 @@ class Constants:
     CONFIG_NAME = "kita-authservice"
     CONFIG_FULL_PATH = "/etc/kita-authservice.yaml"
 
+    REPOSITORY_SOURCES_LOCATION = "./data/sources.json"
+
     MAX_GRPC_WORKERS = 12
     MAX_GRPC_SEND_MESSAGE_LENGTH = 256 * 1024 * 1024
     MAX_GRPC_RECEIVE_MESSAGE_LENGTH = 256 * 1024 * 1024
