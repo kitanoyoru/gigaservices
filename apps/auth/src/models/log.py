@@ -11,7 +11,7 @@ class Base(DeclarativeBase):
 
 
 class LogModel(Base):
-    __tablename__ = "event"
+    __tablename__ = "log"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
