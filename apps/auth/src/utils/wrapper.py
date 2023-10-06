@@ -13,7 +13,7 @@ class Wrapper(ContextManager[None]):
     cancel_failed: Optional[bool] = None
 
     def __init__(self) -> None:
-		self._tasks: Set['asyncio.Task[Any]'] = set()
+        self._tasks: Set["asyncio.Task[Any]"] = set()
 
     def __enter__(self):
         if self._error is not None:
@@ -21,7 +21,7 @@ class Wrapper(ContextManager[None]):
 
         task = _current_task()
         if task is None:
-            raise RuntimeError('Called not inside a task')
+            raise RuntimeError("Called not inside a task")
 
         self._tasks.add(task)
 
@@ -44,15 +44,16 @@ class Wrapper(ContextManager[None]):
             task.cancel()
         self.cancelled = True
 
+
 class DeadlineWrapper(Wrapper):
     @contextmanager
-    def start(self, deadline: 'Deadline') -> Iterator[None]:
+    def start(self, deadline: "Deadline") -> Iterator[None]:
         timeout = deadline.time_remaining()
         if not timeout:
-            raise asyncio.TimeoutError('Deadline exceeded')
+            raise asyncio.TimeoutError("Deadline exceeded")
 
         def callback() -> None:
-            self.cancel(asyncio.TimeoutError('Deadline exceeded'))
+            self.cancel(asyncio.TimeoutError("Deadline exceeded"))
 
         loop = asyncio.get_event_loop()
         timer = loop.call_later(timeout, callback)

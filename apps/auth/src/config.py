@@ -10,6 +10,10 @@ class DatabaseDriver(Enum):
     POSTGRES = "postgresql"
 
 
+class CacheDriver(Enum):
+    REDIS = "redis"
+
+
 @dataclass
 class DatabaseConfig:
     port: int
@@ -32,9 +36,14 @@ class DatabaseConfig:
 
 @dataclass
 class CacheConfig:
-    url: str
+    port: int
+    host: str
+    driver: CacheDriver
     username: str
     password: str
+
+    def get_cache_url(self):
+        return f"{self.driver.value}://{self.host}:{self.port}"
 
 
 @dataclass

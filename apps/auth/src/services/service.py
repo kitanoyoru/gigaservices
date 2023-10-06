@@ -5,6 +5,7 @@ from typing import Any, AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
+from src.crawler import LogModelImport
 from src.database.database import Database
 
 
@@ -23,3 +24,6 @@ class Service:
     def from_session(session: AsyncSession) -> Service:
         database = Database(session)
         return Service(database)
+
+    async def save_log(self, log_import: LogModelImport):
+        return await self._database.save_log(log_import)

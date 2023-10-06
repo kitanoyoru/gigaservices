@@ -12,7 +12,6 @@ _Status = Optional[bool]
 
 
 class CheckBase(abc.ABC):
-
     @abc.abstractmethod
     def __status__(self) -> _Status:
         pass
@@ -31,25 +30,28 @@ class CheckBase(abc.ABC):
 
 
 class ServiceCheck(CheckBase):
-	_value = None
-    _poll_task = None
-    _last_check = None
+    _value: Optional[_Status] = None
+    _poll_task: Optional[asyncio.Task] = None
+    _last_check: Optional[float] = None
 
-	def __init__(
-		self,
-		check_func: Callable[[], Awaitable[_Status]],
-		*,
+    def __init__(
+        self,
+        check_func: Callable[[], Awaitable[_Status]],
+        *,
         check_ttl: float = DEFAULT_CHECK_TTL,
         check_timeout: float = DEFAULT_CHECK_TIMEOUT,
+    ):
+        self._check_func = check_func
+        self._check_ttl = check_ttl
+        self._check_timeout = check_timeout
 
-	):
-		self._check_func = check_func
-		self._check_ttl = check_ttl
-		self._check_timeout = check_timeout
+        self._events: Set[asyncio.Event] = set()
 
-		self._events: Set[asyncio.Event] = set()
+        self._check_lock = asyncio.Event()
+        self._check_lock.set()
 
-		self._check_lock = asyncio.Event()
-		self._check_lock.set()
+        self._check_wrapper = DeadlineWrapper()
 
-		self._check_wrapper = DeadlineWrapper()
+
+class DeadlineWrapper:
+    pass

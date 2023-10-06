@@ -21,6 +21,7 @@ celery = "^5.3.4"
 grpclib = {extras = ["protobuf"], version = "^0.4.6"}
 psycopg = "^3.1.12"
 httpx = "^0.25.0"
+aioredis = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"
@@ -36,16 +37,22 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 target-version = "py310"
+
 select = ["F"]
 ignore = ["F403"]
+fixable = ["ALL"]
+
 
 [tool.pyright]
+include = ["src"]
+exclude = ["src/proto/*/**"]
+
 typeCheckingMode = "strict"
-# reportMissingTypeArgument = "none"
+
 reportUnknownVariableType = "none"
 reportUnknownArgumentType = "none"
 reportUnusedFunction = "none"
-# reportPrivateUsage = "none"
+
 reportUnknownMemberType = "none"
 reportMissingTypeStubs = false
 useLibraryCodeForTypes = true

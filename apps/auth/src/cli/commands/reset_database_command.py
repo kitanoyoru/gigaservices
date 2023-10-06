@@ -15,7 +15,7 @@ from src.config import AppConfig, DatabaseConfig
 from src.constants import Constants
 from src.crawler import load_logs, load_repository_urls
 from src.models import ModelType
-from src.services import Service
+from src.services.service import Service
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +74,7 @@ async def _import_repository(
         case ModelType.LOG.value:
             async for log_import in load_logs(client, url):
                 async with _create_service(engine) as service:
-                    service.save_log(log_import)
+                    await service.save_log(log_import)
         case _:
             pass
 
