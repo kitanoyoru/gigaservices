@@ -1,14 +1,14 @@
+import abc
+
 import signal
 import logging
 
-from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor
+from typing import Any, Coroutine
 
 import grpc
 
 from omegaconf import OmegaConf
-
-from grpclib.server import Server as GRPCServer
 
 from src.config import AppConfig
 from src.services import AuthService, HealthService
@@ -20,22 +20,24 @@ from src.proto import auth_service_pb2_grpc, health_pb2_grpc
 logger = logging.getLogger(__name__)
 
 
-class IServer(ABC):
-    @abstractmethod
-    def serve(self):
+class IServer(abc.ABC):
+    @abc.abstractmethod
+    async def serve(self):
         pass
 
-    @abstractmethod
+    @abc.abstractmethod
     def _register_custom_signal_handlers(self):
         pass
 
 
 class Server(IServer):
+    cleanup_coroutines: list[Coroutine[Any, Any, None]] = []
+
     def __init__(self, config: AppConfig):
         self._config = config
 
-    def serve(self):
-        grpc_server = grpc.server(
+    async def serve(self):
+        grpc_server = grpc.aio.server(
             ThreadPoolExecutor(max_workers=Constants.MAX_GRPC_WORKERS),
             options=[
                 ("grpc.max_send_message_length", Constants.MAX_GRPC_SEND_MESSAGE_LENGTH),
@@ -50,8 +52,16 @@ class Server(IServer):
 
         grpc_server.add_insecure_port("[::]:" + str(self._config.port))
 
-	    logger.info(f"gRPC is running on port {self._config.port}")
-        grpc_server.wait_for_termination()
+        logger.info(f"gRPC server is running on port {self._config.port}")
+        await grpc_server.start()
+
+        async def server_graceful_shutdown():
+            logger.info("gRPC server is shutting down")
+            await grpc_server.stop(5)
+
+        self.cleanup_coroutines.append(server_graceful_shutdown())
+
+        await grpc_server.wait_for_termination()
 
     def _register_custom_signal_handlers(self):
         def sighup_handler():
