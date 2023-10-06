@@ -1,14 +1,11 @@
-import logging
-
 import asyncio
+import logging
 
 import hydra
 
 from src.config import AppConfig
-
 from src.constants import Constants
 from src.server import Server
-
 
 logger = logging.getLogger(__name__)
 

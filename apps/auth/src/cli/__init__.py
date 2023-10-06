@@ -1,7 +1,7 @@
 import click
 
-from .commands.start_server_command import start_server_command
 from .commands.get_config_command import get_config_command
+from .commands.start_server_command import start_server_command
 
 
 @click.group()

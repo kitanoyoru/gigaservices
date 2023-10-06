@@ -27,6 +27,7 @@ ruff = "^0.0.290"
 pytest = "^7.4.2"
 pyright = "^1.1.327"
 sphinx = "^7.2.6"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core"]

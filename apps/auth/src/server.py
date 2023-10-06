@@ -1,21 +1,16 @@
 import abc
-
-import signal
 import logging
-
+import signal
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Coroutine
 
 import grpc
-
 from omegaconf import OmegaConf
 
 from src.config import AppConfig
-from src.services import AuthService, HealthService
 from src.constants import Constants
-
 from src.proto import auth_service_pb2_grpc, health_pb2_grpc
-
+from src.services import AuthService, HealthService
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +21,7 @@ class IServer(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def _register_custom_signal_handlers(self):
+    def register_custom_signal_handlers(self):
         pass
 
 
@@ -40,15 +35,23 @@ class Server(IServer):
         grpc_server = grpc.aio.server(
             ThreadPoolExecutor(max_workers=Constants.MAX_GRPC_WORKERS),
             options=[
-                ("grpc.max_send_message_length", Constants.MAX_GRPC_SEND_MESSAGE_LENGTH),
-                ("grpc.max_receive_message_length", Constants.MAX_GRPC_RECEIVE_MESSAGE_LENGTH),
+                (
+                    "grpc.max_send_message_length",
+                    Constants.MAX_GRPC_SEND_MESSAGE_LENGTH,
+                ),
+                (
+                    "grpc.max_receive_message_length",
+                    Constants.MAX_GRPC_RECEIVE_MESSAGE_LENGTH,
+                ),
             ],
         )
 
-        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(AuthService(), grpc_server)
+        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(
+            AuthService(), grpc_server
+        )
         health_pb2_grpc.add_HealthServicer_to_server(HealthService(), grpc_server)
 
-        self._register_custom_signal_handlers()
+        self.register_custom_signal_handlers()
 
         grpc_server.add_insecure_port("[::]:" + str(self._config.port))
 
@@ -63,7 +66,7 @@ class Server(IServer):
 
         await grpc_server.wait_for_termination()
 
-    def _register_custom_signal_handlers(self):
+    def register_custom_signal_handlers(self):
         def sighup_handler():
             OmegaConf.save(self._config, Constants.CONFIG_FULL_PATH)
 

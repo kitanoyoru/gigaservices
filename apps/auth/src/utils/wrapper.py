@@ -1,9 +1,7 @@
 import asyncio
-
-from types import TracebackType
-from typing import Optional, Set, Type, ContextManager
-from typing import Iterator, Any
 from contextlib import contextmanager
+from types import TracebackType
+from typing import Any, ContextManager, Iterator, Optional, Set, Type
 
 _current_task = asyncio.current_task
 
