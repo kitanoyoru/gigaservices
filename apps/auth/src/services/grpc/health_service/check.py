@@ -5,6 +5,8 @@ import time
 from typing import Awaitable, Callable, Optional, Set
 
 from src.constants import Constants
+from src.utils.deadline import Deadline
+from src.utils.wrapper import DeadlineWrapper
 
 log = logging.getLogger(__name__)
 
@@ -77,9 +79,7 @@ class ServiceCheck(CheckBase):
         try:
             deadline = Deadline.from_timeout(self._check_timeout)
             with self._check_wrapper.start(deadline):
-                value = await self._check_func()
-            if value is not None and not isinstance(value, bool):
-                raise TypeError(f"Invalid health check func status type: {value}")
+                await self._check_func()
         except asyncio.CancelledError:
             raise
         except Exception:
@@ -160,6 +160,3 @@ class ServiceStatus(CheckBase):
     async def __unsubscribe__(self, event: asyncio.Event):
         self._events.discard(event)
 
-
-class DeadlineWrapper:
-    pass
