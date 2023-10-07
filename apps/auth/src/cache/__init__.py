@@ -1,6 +1,5 @@
 import aioredis
 from aioredis import Redis
-
 from src.config import CacheConfig
 
 

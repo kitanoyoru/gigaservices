@@ -6,7 +6,6 @@ from typing import Any, Coroutine
 
 import grpc
 from omegaconf import OmegaConf
-
 from src.config import AppConfig
 from src.constants import Constants
 from src.proto import auth_service_pb2_grpc, health_pb2_grpc

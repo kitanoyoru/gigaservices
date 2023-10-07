@@ -1,7 +1,6 @@
 import alembic.config
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
-
 from src.config import DatabaseConfig
 
 

@@ -32,4 +32,3 @@ message OrderItem {
 	bool physical = 2;
 	int64 nodes = 3;
 }
-

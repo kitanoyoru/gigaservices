@@ -13,7 +13,7 @@ RUN go mod tidy
 RUN go build -o /bin/emailservice cmd/main.go
 RUN rm -rf ${PROJECT_DIR}
 
-FROM alpine:latest 
+FROM alpine:latest
 
 RUN useradd -m -U -d /home/kitanoyoru kitanoyoru -s /bin/bash
 

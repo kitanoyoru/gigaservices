@@ -5,7 +5,6 @@ from typing import Any, AsyncGenerator, Optional
 
 import httpx
 import orjson as json
-
 from src.constants import Constants
 from src.errors import CrawlerException
 

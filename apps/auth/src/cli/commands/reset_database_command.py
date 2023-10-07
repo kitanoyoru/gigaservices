@@ -9,7 +9,6 @@ import httpx
 import hydra
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncEngine
-
 from src import database
 from src.config import AppConfig, DatabaseConfig
 from src.constants import Constants
@@ -30,7 +29,7 @@ async def _reset_db(db_config: DatabaseConfig):
                    DROP TABLE IF EXISTS
                        log,
                     CASCADE;
-                        
+
                 """
             )
         )

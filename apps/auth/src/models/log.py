@@ -4,7 +4,6 @@ from datetime import date
 
 from sqlalchemy import Boolean, DateTime, Integer, String, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-
 from src.crawler import LogModelImport
 
 

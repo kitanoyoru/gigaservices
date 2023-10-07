@@ -4,7 +4,6 @@ from contextlib import asynccontextmanager
 from typing import Any, AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
-
 from src.crawler import LogModelImport
 from src.database.database import Database
 

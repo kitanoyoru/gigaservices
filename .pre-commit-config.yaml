@@ -1,0 +1,70 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    # Git style
+    - id: check-added-large-files
+    - id: check-merge-conflict
+    - id: check-vcs-permalinks
+    - id: forbid-new-submodules
+
+    # Common errors
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+      args: [--markdown-linebreak-ext=md]
+      exclude: CHANGELOG.md
+    - id: check-yaml
+    - id: check-json
+    - id: check-toml
+    - id: check-merge-conflict
+    - id: check-executables-have-shebangs
+
+    # Cross platform
+    - id: check-case-conflict
+    - id: mixed-line-ending
+      args: [--fix=lf]
+
+- repo: https://github.com/jumanjihouse/pre-commit-hooks
+  rev: 3.0.0
+  hooks:
+    - id: shfmt
+      args: ['-l', '-i', '2', '-ci', '-sr', '-w']
+    - id: shellcheck
+
+- repo: https://github.com/psf/black-pre-commit-mirror
+  rev: 23.9.1
+  hooks:
+    - id: black
+      language_version: python3.11
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.0.290
+  hooks:
+    - id: ruff
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+    - id: isort
+
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.83.4
+  hooks:
+    - id: terraform_fmt
+
+# # Nedd to enable after fixing Dockerfiles
+# # Dockerfile linter
+
+# - repo: https://github.com/hadolint/hadolint
+#   rev: v2.12.1-beta
+#   hooks:
+#     - id: hadolint
+#       args: [
+#         '--ignore', 'DL3027', # Do not use apt
+#         '--ignore', 'DL3007', # Using latest
+#         '--ignore', 'DL4006', # Not related to alpine
+#         '--ignore', 'SC1091', # Useless check
+#         '--ignore', 'SC2015', # Useless check
+#         '--ignore', 'SC3037', # Not related to alpine
+#         '--ignore', 'DL3013', # Pin versions in pip
+#       ]

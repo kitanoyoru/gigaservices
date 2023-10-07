@@ -159,4 +159,3 @@ class ServiceStatus(CheckBase):
 
     async def __unsubscribe__(self, event: asyncio.Event):
         self._events.discard(event)
-

@@ -24,6 +24,3 @@ tracing:
   enable: false
   jaeger:
     url: jaeger.com
-
-
-

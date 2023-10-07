@@ -1,6 +1,5 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
 from src.crawler import LogModelImport
 from src.models.log import LogModel
 
