@@ -1,7 +1,9 @@
 import asyncio
 import logging
 
+import click
 import hydra
+from hydra.utils import instantiate
 from src.config import AppConfig
 from src.constants import Constants
 from src.server import Server
@@ -9,12 +11,15 @@ from src.server import Server
 logger = logging.getLogger(__name__)
 
 
-@hydra.main(
-    version_base=None,
-    config_path=Constants.CONFIG_PATH,
-    config_name=Constants.CONFIG_NAME,
-)
-def start_server_command(config: AppConfig):
+hydra.initialize(config_path="conf")
+raw_config = hydra.compose(Constants.CONFIG_NAME)
+
+config: AppConfig = instantiate(raw_config)
+
+
+@click.command()
+def start_server_command():
+    print(config.port)
     s = Server(config)
     loop = asyncio.get_event_loop()
 

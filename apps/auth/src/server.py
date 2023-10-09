@@ -9,7 +9,7 @@ from omegaconf import OmegaConf
 from src.config import AppConfig
 from src.constants import Constants
 from src.proto.health.v1 import health_pb2_grpc
-from src.services import HealthService
+from src.services.grpc.health_service.health import HealthService
 
 logger = logging.getLogger(__name__)
 
