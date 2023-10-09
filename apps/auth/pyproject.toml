@@ -30,6 +30,7 @@ pytest = "^7.4.2"
 pyright = "^1.1.327"
 sphinx = "^7.2.6"
 isort = "^5.12.0"
+grpcio-tools = "^1.59.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -41,6 +42,28 @@ target-version = "py310"
 select = ["F"]
 ignore = ["F403"]
 fixable = ["ALL"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
 
 
 [tool.pyright]

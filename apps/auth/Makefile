@@ -1,33 +1,14 @@
-GOPATH:=$(shell go env GOPATH)
+__default__:
+	@echo "Please specify a target to make"
 
-.PHONY: init
-init:
-	@go get -u google.golang.org/protobuf/proto
-	@go install github.com/golang/protobuf/protoc-gen-go@latest
-	@go install github.com/go-micro/generator/cmd/protoc-gen-micro@latest
+GRPC_GEN=python3 -m grpc_tools.protoc -I. --python_out=./src --grpc_python_out=./src
+GRPC_GENERATED=*{_pb2.py,_grpc.py,.pyi}
 
 .PHONY: proto
 proto:
-	@protoc --proto_path=. --micro_out=. --go_out=:. ./pkg/proto/emailservice.proto
-	@protoc --proto_path=. --micro_out=. --go_out=:. ./pkg/proto/health.proto
-
+	$(GEN) proto/health/v1/health.proto
+	$(GEN) proto/auth/v1/auth.proto
 
 .PHONY: update
 update:
-	@go get -u
-
-.PHONY: tidy
-tidy:
-	@go mod tidy
-
-.PHONY: build
-build:
-	@go build -o emailservice *.go
-
-.PHONY: test
-test:
-	@go test -v ./... -cover
-
-.PHONY: docker
-docker:
-	@docker build -t emailservice:latest .
+	@poetry update

@@ -8,8 +8,8 @@ import grpc
 from omegaconf import OmegaConf
 from src.config import AppConfig
 from src.constants import Constants
-from src.proto import auth_service_pb2_grpc, health_pb2_grpc
-from src.services import AuthService, HealthService
+from src.proto.health.v1 import health_pb2_grpc
+from src.services import HealthService
 
 logger = logging.getLogger(__name__)
 
@@ -45,9 +45,9 @@ class Server(IServer):
             ],
         )
 
-        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(
-            AuthService(), grpc_server
-        )
+        #        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(
+        #            AuthService(), grpc_server
+        #        )
         health_pb2_grpc.add_HealthServicer_to_server(HealthService(), grpc_server)
 
         self.register_custom_signal_handlers()
