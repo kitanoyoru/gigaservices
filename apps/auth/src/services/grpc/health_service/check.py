@@ -79,7 +79,7 @@ class ServiceCheck(CheckBase):
         try:
             deadline = Deadline.from_timeout(self._check_timeout)
             with self._check_wrapper.start(deadline):
-                await self._check_func()
+                self._value = await self._check_func()
         except asyncio.CancelledError:
             raise
         except Exception:

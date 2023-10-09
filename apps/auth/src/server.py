@@ -48,6 +48,7 @@ class Server(IServer):
         #        auth_service_pb2_grpc.add_AuthServiceServicer_to_server(
         #            AuthService(), grpc_server
         #        )
+
         health_pb2_grpc.add_HealthServicer_to_server(HealthService(), grpc_server)
 
         self.register_custom_signal_handlers()

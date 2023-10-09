@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Any, Collection, Dict, Mapping, Optional, Set
 
 import grpc
 from src.proto.health.v1.health_pb2 import HealthCheckRequest  # type: ignore
-from src.proto.health.v1.health_pb2 import HealthCheckResponse
+from src.proto.health.v1.health_pb2 import HealthCheckResponse  # type: ignore
 from src.proto.health.v1.health_pb2_grpc import HealthServicer
 
 if TYPE_CHECKING:
@@ -69,6 +69,8 @@ class HealthService(HealthServicer):
         self._checks = {
             _service_name(s): set(check_list) for s, check_list in checks.items()
         }
+
+        print(self._checks)
 
     async def Check(self, request: HealthCheckRequest, _context: grpc.ServicerContext) -> HealthCheckResponse:  # type: ignore
         checks = self._checks.get(request.service)
